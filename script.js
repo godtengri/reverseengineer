@@ -5,6 +5,12 @@ const app = express();
 
 app.use(express.static("public"));
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.post("/reverse-image-search", upload.single("image"), (req, res) => {
   const imageData = req.file.buffer.toString("base64");
   const googleSearchUrl = `https://www.google.com/searchbyimage?image_url=data:image/jpeg;base64,${imageData}`;
@@ -19,8 +25,6 @@ app.post("/reverse-image-search", upload.single("image"), (req, res) => {
     tineye: tineyeSearchUrl
   };
 
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.status(200).send("Results from four different image search engines: Google, Bing, Yandex, and Tineye");
 });
 
