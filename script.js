@@ -16,7 +16,8 @@ res.send({ })
 
 }) 
 
-app.post("/reverse-image-search", upload.single("image"), (req, res) => {
+app.post("/reverse-image-search", console.log("reverse image çalışıyor"), upload.single("image"), (req, res) => {
+  console.log(req.body)
   const imageData = req.file.buffer.toString("base64");
   const googleSearchUrl = `https://www.google.com/searchbyimage?image_url=data:image/jpeg;base64,${imageData}`;
   const bingSearchUrl = `https://www.bing.com/images/search?q=imgurl:data:image/jpeg;base64,${imageData}`;
@@ -34,5 +35,5 @@ app.post("/reverse-image-search", upload.single("image"), (req, res) => {
 });
 
 app.listen(process.env.PORT || 5500, () => {
-  console.log("Server started on http://localhost:5500/%22);
+  console.log("Server started on http://localhost:5500/%22");
 });
