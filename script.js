@@ -28,6 +28,6 @@ app.post("/reverse-image-search", upload.single("image"), (req, res) => {
   res.status(200).send("Results from four different image search engines: Google, Bing, Yandex, and Tineye");
 });
 
-app.listen(5500, () => {
-  console.log("Server started on http://localhost:5500");
+app.listen(process.env.PORT || 5500, () => {
+  console.log("Server started on http://localhost:5500/%22);
 });
