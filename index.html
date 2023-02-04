@@ -54,7 +54,7 @@ searchButton.addEventListener("click", () => {
   const formData = new FormData();
   formData.append("image", file);
 
-  fetch("https://localhost/reverse-image-search", {
+  fetch("https://reverseengineer.vercel.app/reverse-image-search", {
   method: "POST",
   body: formData
 })
