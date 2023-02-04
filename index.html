@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title>Reverse Image Search</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    #file-input {
+      margin: 20px 0;
+    }
+
+    #search-button {
+      margin: 20px 0;
+      padding: 10px 20px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin: 20px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Reverse Image Search</h1>
+    <input type="file" id="file-input" />
+    <button id="search-button">Search</button>
+    <div id="result"></div>
+  </div>
+  <script>
+const searchButton = document.getElementById("search-button");
+const result = document.getElementById("result");
+searchButton.addEventListener("click", () => {
+  result.innerHTML = "Searching...";
+
+  const fileInput = document.getElementById("file-input");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    result.innerHTML = "Please select an image.";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  fetch("http://localhost:5500/reverse-image-search", {
+  method: "POST",
+  body: formData
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.text();
+  })
+  .then(data => {
+    result.innerHTML = data;
+  })
+  .catch(error => {
+    result.innerHTML = "Error: " + error.message;
+  });
+});
+  </script>
+</body>
+
+</html>
