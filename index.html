@@ -54,7 +54,7 @@ searchButton.addEventListener("click", () => {
   const formData = new FormData();
   formData.append("image", file);
 
-  fetch("https://candid-wisp-97957f.netlify.app:5500/reverse-image-search", {
+  fetch("https://localhost/reverse-image-search", {
   method: "POST",
   body: formData
 })
