@@ -11,6 +11,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get("/", (req,res) => {
+res.send({ })
+
+}) 
+
 app.post("/reverse-image-search", upload.single("image"), (req, res) => {
   const imageData = req.file.buffer.toString("base64");
   const googleSearchUrl = `https://www.google.com/searchbyimage?image_url=data:image/jpeg;base64,${imageData}`;
